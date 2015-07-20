@@ -17,42 +17,119 @@ public class LowestCommonAncestorOfBinaryTree236 {
 	 * @return
 	 */
 	public static TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
-		LinkedList<TreeNode> pPath = getReversePath(root, q);
-		LinkedList<TreeNode> qPath = getReversePath(root, q);
-		int size1 = pPath.size();
-		int size2 = qPath.size();
-		size1 = size1>size2? size1:size2;
-		for(int i = 0 ; i < size1; i++){
-			if(pPath.get(i).val == qPath.get(i).val){
-				continue;
-			}else{
-				return pPath.get(i);
+		ArrayList<LinkedList<TreeNode>>  pAllPath = getReversePath(root, p);
+     	ArrayList<LinkedList<TreeNode>>  qAllPath = getReversePath(root, q );
+		for(LinkedList<TreeNode> tempLinkedList: pAllPath){
+			for(TreeNode temp:tempLinkedList){
+				System.out.print(temp.val+" ");
+				}
+			System.out.println();
+		}
+		
+		for(LinkedList<TreeNode> tempLinkedList: qAllPath){
+			for(TreeNode temp:tempLinkedList){
+				System.out.print(temp.val+" ");
+				}
+			System.out.println();
+		}
+		int pAllSize = pAllPath.size();
+		int qAllSize = qAllPath.size();
+		LinkedList<TreeNode> one_pPathLinkedList;
+		LinkedList<TreeNode> one_qPathLinkedList;
+		int size1,size2,minSize;
+		int min = 0;
+		TreeNode lowestNode = null;
+		for(int j =0; j< pAllSize ; j++){
+			one_pPathLinkedList = pAllPath.get(j);
+			size1 = one_pPathLinkedList.size();
+			for(int k =0; k < qAllSize ; k ++){
+				one_qPathLinkedList = qAllPath.get(k);
+				size2 = one_qPathLinkedList.size();
+				System.out.println( size1 + " :" +size2);
+				
+				minSize = size1>size2? size2:size1;
+				int i = 0 ; 
+				//System.out.println("size1" +minSize);
+				for( i = 0 ; i < minSize; i++){
+					if(one_pPathLinkedList.get(i)  == one_qPathLinkedList.get(i) ){
+						continue;
+					}else{
+						break;
+					}
+				}
+ 
+				//System.out.println("it " +i);
+				if(i > min ){
+					min = i;
+					//System.out.println(min);
+					lowestNode = one_pPathLinkedList.get(i-1);
+					//System.out.println(lowestNode.val);
+				}
+				
 			}
 		}
-		return null;
+
+
+		return lowestNode;
 	}
 	
-	static LinkedList<TreeNode> getReversePath(TreeNode rootNode,TreeNode q){
+	static ArrayList<LinkedList<TreeNode>>  getReversePath(TreeNode rootNode,TreeNode q){
+		ArrayList<LinkedList<TreeNode>> allPathArrayList  = new ArrayList<LinkedList<TreeNode>>();
 		LinkedList<TreeNode> stackLinkedList = new LinkedList<TreeNode>();
-		if(rootNode == null) return stackLinkedList;
+		LinkedList<TreeNode> tempLinkedList ;
+		LinkedList<Boolean> stackFlagList = new LinkedList<Boolean>();
+		if(rootNode == null) return allPathArrayList;
+		
 		TreeNode tempNode = rootNode;
-		while(rootNode !=null || !stackLinkedList.isEmpty()){
-			while(rootNode!=null){
-				stackLinkedList.add(rootNode);
-				if(rootNode.val == q.val) return stackLinkedList;
-				rootNode = rootNode.left;
+//		boolean flag= false;
+		while(tempNode !=null || !stackLinkedList.isEmpty()){
+			while(tempNode!=null){
+				stackLinkedList.addLast(tempNode);
+				stackFlagList.addLast(false);
+				if(tempNode  == q  ) {
+					
+					tempLinkedList = (LinkedList<TreeNode>) stackLinkedList.clone();
+					allPathArrayList.add(tempLinkedList);
+					//return stackLinkedList; 
+				}
+				tempNode = tempNode.left;
 			}
-			tempNode = stackLinkedList.peek();
-			tempNode = tempNode.right;
+			tempNode = stackLinkedList.getLast().right;
+		
+			// 如果栈顶元素的右子树为null，那么将该节点弹出，继续判断，栈顶元素的flag 如果为true，说明应该继续弹出
+			// flag 说明当前节点以及其左右子树都不会是该路径上的节点，应该弹出
+			if(tempNode == null) {
+				// 首先将栈顶元素及其flag弹出
+				stackFlagList.removeLast();
+				stackLinkedList.removeLast();
+				//System.out.println(stackLinkedList.size() +" " + stackFlagList.size());
+				// 将栈顶中flag为true的都弹出
+				while(  !stackFlagList.isEmpty() && stackFlagList.getLast()){
+					stackFlagList.removeLast();
+					stackLinkedList.removeLast();
+				}
+				if(stackFlagList.isEmpty()) break;
+				tempNode = stackLinkedList.getLast().right;
+				// 记得此时将其对应flag置为true
+				stackFlagList.removeLast();
+				stackFlagList.addLast(true);
+			}// 当前节点的右子树不为空，说明可以入栈，将当前节点的flag置为 true
+			else {
+//				tempNode = stackLinkedList.pop();
+				stackFlagList.removeLast();
+				stackFlagList.addLast(true);
+				//System.out.println(stackLinkedList.size() +" " + stackFlagList.size());
+			}
 		}
-		return stackLinkedList;
+		return allPathArrayList;
 		
 	}
 	
 	 public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 	     if(root == null ) return null;
 	     if(p==null || q == null)return null;
-	     if(p==root && q == root) return root;
+	     // 下面是||，开始的时候使用&& 
+	     if(p.val== root.val || q.val == root.val) return root;
 		 if(containsNode(root.left, p) && containsNode(root.right, q) || containsNode(root.left, q) && containsNode(root.right, p)){
 			 return root;
 		 }
@@ -86,14 +163,19 @@ public class LowestCommonAncestorOfBinaryTree236 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TreeNode root = TreeAlg.getTreeExample();
-		TreeAlg.postOrder(root);
+		TreeAlg.preOrder(root);
 		TreeNode p = new TreeNode();
-		p.val = 101;
+		p.val = 98;
 		//System.out.println(containsNode(root,p));
 		TreeNode q = new TreeNode();
-		q.val = 100;
+		q.val = 98;
 		System.out.println();
 		System.out.println(lowestCommonAncestor(root,p,q).val);
+//		LinkedList<TreeNode> reLinkedList = getReversePath(root, q);
+//		System.out.println(q.val);
+//		for(TreeNode temp:reLinkedList){
+//			System.out.print(temp.val+" ");
+//		}
 		System.out.println(lowestCommonAncestor1(root,p,q).val);
 	}
 

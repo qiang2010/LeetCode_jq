@@ -24,8 +24,8 @@ public class TreeAlg {
 	}
 
 	public static TreeNode getTreeExample(){
-		String first = "abdegcfh";
-		String mid = "dbgeafhc";
+		String first = "abdegcbh";
+		String mid = "dbgeabhc";
 		//TreeAlg  treeAlg = new TreeAlg();
 		TreeNode root = TreeAlg.buildTree(first, 0, first.length()-1, mid, 0, mid.length()-1);
 		return root;
