@@ -14,7 +14,7 @@ public class DeleteNodeinALinkedList237 {
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ListNode example = ListNode.getAExampleList();
+		ListNode example = ListNode.getAnExampleList();
 		
 	}
 

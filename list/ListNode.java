@@ -6,7 +6,7 @@ public class ListNode {
      public  ListNode next = null;
      public ListNode(int x) { val = x; }
      
-     public static ListNode getAExampleList(){
+     public static ListNode getAnExampleList(){
     	 ListNode head = new ListNode(0) ;
     	 ListNode tempNode = head ,next;
     	 int []ll = {1,4,4,5,2,8,9,0};

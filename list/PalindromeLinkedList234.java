@@ -54,7 +54,7 @@ public class PalindromeLinkedList234 {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ListNode head = ListNode.getAExampleList();
+		ListNode head = ListNode.getAnExampleList();
 		ListNode.printList(head);
 		System.out.println();
 //		ListNode.printList(reverseList(head));
