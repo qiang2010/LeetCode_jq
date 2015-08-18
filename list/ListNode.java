@@ -21,7 +21,7 @@ public class ListNode {
      
      public static ListNode getListByNums(int[] nums){
     	 int size = nums.length;
-    	 if(nums == null  || size == 0) return new ListNode(-1);
+    	 if(nums == null  || size == 0) return null;
     	 ListNode head = new ListNode(nums[0]);
     	 ListNode temp,next = head;
     	 for(int i = 1; i < size ; i++){

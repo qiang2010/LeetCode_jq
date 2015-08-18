@@ -24,7 +24,6 @@ public class FourSum18 {
 				ans.add(tempAns);
 			}
 	   }
-	   
 	   return ans;
    }	
 	
