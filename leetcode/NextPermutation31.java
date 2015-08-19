@@ -1,5 +1,7 @@
 package qiang.leetcode;
 
+import java.util.Arrays;
+
 public class NextPermutation31 {
     
 	public static void nextPermutation(int[] nums) {
@@ -18,27 +20,33 @@ public class NextPermutation31 {
     	    	}
     	    	return ;
     		}
-    		if(nums[i-1] <nums[i])break;
-    		//}
     		// 在左侧找到一个小于nums[i]的数
-    		if(j>-1){
-    			int k = nums[j];
-    			nums[j] = nums[i];
-    			nums[i] = k;
-    			for(int m =0; m < (size-1-j)/2 ;m++){
-    				k = nums[j+1+m];
-    				nums[j+1+m] = nums[size-1-m];
-    				nums[size-1-m] = k;
+    		if(nums[i-1] <nums[i]){
+    			
+    			// 遍历 i到size-1 之间的数，找到刚好大于 nums[i-1]的数。
+    			int minGreater = nums[i]; // 初始化为nums[i]
+    			int n,minPos = i;
+    			
+    			for( n =  i+1; n < size; n++){
+    				if(nums[n]> nums[i-1] && nums[n] < minGreater){
+    					minGreater = nums[n];
+    					minPos = n;
+    				}
     			}
+    			
+    			int k = nums[i-1];
+    			nums[i-1] = nums[minPos];
+    			nums[minPos] = k;
+    			Arrays.sort(nums, i, size);
     			return ;
     		}
+    		//}
+    		
     	}
-   
-    	
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int []nums = {4,2,0,2,3,2,0};
+		int []nums = {1,3,2};
 		nextPermutation(nums);
 		int i = 0;
 		while(i < nums.length){
