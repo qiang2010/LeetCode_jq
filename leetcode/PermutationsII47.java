@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Permutations47 {
+public class PermutationsII47 {
 
  
     
@@ -23,26 +23,30 @@ public class Permutations47 {
    *  
    * @param nums
    */
-  Set<String> allPer = new HashSet<String>();
   public void perm(List<List<Integer>> ans,int []nums, int b ,int e){
 	  if(b == e){
 		  // 当只有一个数的时候
 		  List<Integer> list = new ArrayList<Integer>();
-		  StringBuilder key = new StringBuilder();
 		  for(int i = 0 ; i < nums.length ; i++){
 			  list.add(nums[i]);
-			  key.append(list.get(i));
-//			  System.out.print(nums[i]+" ");
+			  System.out.print(nums[i]+" ");
 		  }
+		  ans.add(list);
+		  //System.out.println();
 		 
-		  if(!allPer.contains(key.toString())){
-			  ans.add(list);
-			  allPer.add(key.toString());
-			  System.out.println(list.toString());
-		  }
 	 }else{
 		 int k = nums[b];
+		 int mn;
+		 boolean flagMn = false;
 		 for(int j = b; j < e+1; j++){
+			 flagMn = false;
+			 for(  mn  = b; mn< j;mn++){
+				 if(nums[mn] == nums[j]){
+					 flagMn = true;
+					 break;
+				 }
+			 }
+			 if(flagMn)continue;
 			 nums[b] = nums[j];
 			 nums[j] = k;
 			 perm(ans,nums,b+1,e);
@@ -55,8 +59,8 @@ public class Permutations47 {
   
 	
 	public static void main(String []args){
-		Permutations47 pp = new Permutations47();
-		int []nums = {1,1,3};
+		PermutationsII47 pp = new PermutationsII47();
+		int []nums = {1};
 		pp.permute22(nums);
 		
 	}
