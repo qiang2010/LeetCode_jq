@@ -14,36 +14,71 @@ public class SearchInRotatedSortedArray33 {
 	 */
 	
     public int search(int[] nums, int target) {
-     
+    	if(nums == null || nums.length == 0) return -1;
+    	int pivot = searchPivot(nums);
+    	System.out.println(pivot);
+    	if(pivot==0){
+    		return binarySearch(nums, 0, nums.length-1, target);
+    	}
+    	if(target >= nums[0] ){
+    		return binarySearch(nums,0, pivot, target);
+    	}
+    	return binarySearch(nums, pivot, nums.length-1, target);
+    	
+    }	
+	
+    public int binarySearch(int nums[],int left,int right,int target){
+    	
+    	int mid;
+    	while(left <= right){
+    		mid = (left + right)/2;
+    		if(nums[mid] == target ){
+    			return mid;
+    		}
+    		if(nums[mid]< target){
+    			left = mid +1;
+    		}else{
+    			right = mid-1;
+    		}
+    	}
+    	return -1;
+    }
+    
+    public int searchPivot(int []nums){
+
     	if(nums == null || nums.length == 0 ) {
     		return -1;
     	}
-    	int ans=-1,pos = -1;
+//    	if(nums.length == 1) return 0;
+    	int ans=Integer.MAX_VALUE,pos = 0;
     	int left = 0;
-    	int right = nums.length;
+    	int right = nums.length-1;
     	int mid;
-    	while(left < right){
+    	while(left <= right){
     		mid= (left+right)/2;
     		// left 到 mid 是 有序的
-    		if(nums[mid] > nums[left]){
+    		if(nums[mid] >= nums[left]){
     			if(ans > nums[left] ){
     				ans = nums[left];
     				pos = left;
     			}
     			left = mid+1;
     		}else{
-    			// mid 到 right是有序的
-    			if(nums[right])
+    			if(nums[mid] < ans){
+    				ans = nums[mid];
+    				pos = mid;
+    			}
+    			right = mid-1;
     		}
-    		
-    		
     	}
-    	return ans;
-    }	
-	
+    	return pos;
+    
+    }
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		SearchInRotatedSortedArray33 sr = new SearchInRotatedSortedArray33();
+		int []nums={5,1,2,3,4};
+		int target = 5;
+		System.out.println(sr.search(nums, target)); 
 	}
 
 }

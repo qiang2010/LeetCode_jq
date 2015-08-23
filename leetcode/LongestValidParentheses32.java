@@ -16,6 +16,7 @@ public class LongestValidParentheses32 {
 				edge = k + dp[k+1]+1;
 				if(edge < size && s.charAt(edge)==')'){
 					dp[k] = dp[k+1]+2;
+					//比如对于这种情况()()
 					if(edge+1<size){
 						dp[k]+=dp[edge+1];
 					}
