@@ -1,8 +1,12 @@
 package qiang.leetcode;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class ImplementStackUsingQueues225 {
 
 	List<Integer> queue1 = new LinkedList<Integer>();
+	List<Integer> queue2 = new LinkedList<Integer>();
 	
 	
 	 // Push element x onto stack.
