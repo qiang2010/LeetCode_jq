@@ -43,9 +43,9 @@ public class ZigZagConversion6 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String s = "PAYPALISHIRING";
-		int row = 3;
-		s = "ABCDE";
-		row = 3;
+		int row = 2;
+		s = "ABC";
+		row = 2;
 		System.out.println(convert(s,row));
 	}
 
