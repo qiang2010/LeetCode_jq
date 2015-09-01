@@ -34,6 +34,11 @@ public class IntegerCacheTest {
 		Integer e = 10000;
 		System.out.println("e == c : " + (e==c));
 		System.out.println("e == d : " + (e==d));
+		
+		
+		Integer ab = new Integer(3);
+		Integer ac = new Integer(3);
+		System.out.println(ab == ac);
 	}
 	
 	/**
@@ -67,15 +72,26 @@ public class IntegerCacheTest {
 	}
 	
 	public static void  isLongSame(){
-		
-		
+		Long a = 1l;
+		Long b = 1l;
+		System.out.println(a==b);
 		
 	}
 	
+	public static void isBooleanSame(){
+		Boolean a = true;
+		Boolean b = true;
+		
+		System.out.println(a==b);
+		
+		Boolean c = false;
+		Boolean e = false;
+		System.out.println( c == e);
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		IntegerCacheTest.isTowStringSameAdd();
+		IntegerCacheTest.isTwoIntegerSame();
 	}
 
 }

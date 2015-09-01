@@ -1,5 +1,7 @@
 package qiang.leetcode.util;
 
+import java.util.List;
+
 public class PrintUtil {
 
 	
@@ -10,6 +12,18 @@ public class PrintUtil {
 		for(int i=0;i<row;i++){
 			for(int j =0; j< col; j++){
 				System.out.print(in[i][j]+"  ");
+			}
+			System.out.println();
+		}
+	}
+	
+
+	public static void print2DList(List<List<Integer>>  in){
+		int row = in.size();
+		
+		for(int i=0;i<row;i++){
+			for(int j =0; j< in.get(i).size(); j++){
+				System.out.print(in.get(i).get(j)+"  ");
 			}
 			System.out.println();
 		}
