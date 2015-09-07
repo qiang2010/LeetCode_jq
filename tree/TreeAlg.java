@@ -102,6 +102,60 @@ public class TreeAlg {
 	}
 	
 	
+	/**
+	 * 
+	 *  根据输入序列构建二叉树
+	 *  "123##4##5"
+	 *  The serialization of a binary tree follows a level order traversal,
+	 *   where '#' signifies a path terminator where no node exists below.
+	 * @param ser
+	 * @return
+	 */
+	public static TreeNode getTreeForSerialized(String ser){
+		if(ser == null || ser.trim().length() ==0) return null;
+		LinkedList<Character> queue = new LinkedList<Character>();
+		LinkedList<TreeNode> tree = new LinkedList<TreeNode>();
+		queue.addLast(ser.charAt(0));
+		TreeNode root = new TreeNode();
+		tree.addLast(root);
+		root.val = queue.getFirst()-'0'; 
+		int size = ser.length();
+		char temp;
+		TreeNode tempNode;
+		for(int i =1; i < size; i++){
+			temp = queue.getFirst();
+			tempNode = tree.getFirst();
+			tree.removeFirst();
+			queue.removeFirst();
+			if(temp !='#'){
+				if(i<size){
+					if(ser.charAt(i) == '#'){
+						tempNode.left = null;
+					}else{
+						TreeNode left = new TreeNode(ser.charAt(i)-'0');
+						queue.addLast(ser.charAt(i));
+						tree.addLast(left);
+						tempNode.left = left;
+					}
+					
+				}
+				if(++i<size){
+					if(ser.charAt(i) == '#'){
+						tempNode.right = null;
+					}else{
+						TreeNode right = new TreeNode(ser.charAt(i)-'0');
+						queue.addLast(ser.charAt(i));
+						tree.addLast(right);
+						tempNode.right = right;
+					}
+				}
+			}
+			
+		}
+		return root;
+	}
+	
+	
 }
 //class TreeNode {
 //	TreeNode left,right;

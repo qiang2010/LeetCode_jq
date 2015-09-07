@@ -1,6 +1,5 @@
 package qiang.list;
 
-import java.util.LinkedList;
 
 public class PartitionList86 {
 
@@ -11,11 +10,9 @@ public class PartitionList86 {
      ListNode greatOrE = new ListNode(-1);
     
      ListNode tempLess = less,tempGreat = greatOrE;
-     ListNode lastLess=head;
      while(head !=null){
     	// next = head.next;
     	 if(head.val < x){
-    		 lastLess = tempLess;
     		 tempLess.next = head;
     		 tempLess =  tempLess.next;
     	 }else{

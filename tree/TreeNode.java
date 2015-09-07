@@ -8,5 +8,8 @@ public class TreeNode {
 		left = right = null;
 		val = -1;
 	}
-	
+	public TreeNode(int v){
+		left = right = null;
+		val = v;
+	}
 }
