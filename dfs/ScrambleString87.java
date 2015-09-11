@@ -4,6 +4,44 @@ import java.util.HashMap;
 
 public class ScrambleString87 {
 
+	/**
+	 * 这里使用动态规划来解
+	 * @param s1
+	 * @param s2
+	 * @return
+	 */
+	public boolean isScramble_DP(String s1, String s2) {
+		
+		if(s1 == null && s2 == null) return true;
+    	if(s1 == null )  return false;
+    	if(s2 == null )return false;
+    	int size1 = s1.length();
+    	int size2 = s2.length();
+    	if(size1 != size2 ) return false;
+		boolean[][][]dp = new boolean[size1][size1][size1];
+		
+		// 初始化长度为1的情况
+		for(int i =0; i < size1; i++){
+			for (int j = 0; j <size1; j++) {
+				dp[0][i][j] = s1.charAt(i) == s2.charAt(j);
+			}
+		}
+		for( int len= 1 ; len < size1; len++){
+			for( int i = 0; i < size1-len;i++){
+				for(int j = 0; j < size1 -len ; j++){
+					for(int k = 0; k <= len;k++){
+						dp[len][i][j] =(dp[len][i][j]) ||(dp[k][i][j] && dp[len-k-1][i+k+1][j+k+1]) || (dp[k][i][j+len-k] && dp[len-k-1][i+k+1][j]);
+						if(dp[len][i][j] )break;
+					}
+				}
+			}
+		}
+		return dp[size1-1][0][0];
+		
+	}
+	
+	
+	
 	
 	
     public boolean isScramble(String s1, String s2) {
@@ -74,7 +112,8 @@ public class ScrambleString87 {
 	public static void main(String[] args) {
 
 		ScrambleString87 ss = new ScrambleString87();
-		System.out.println(ss.isScramble("rgeat", "grect"));
+		System.out.println(ss.isScramble("abc", "bca"));
+		System.out.println(ss.isScramble_DP("abc", "bca"));
 	}
 
 }
