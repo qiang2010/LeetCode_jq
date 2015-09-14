@@ -1,7 +1,7 @@
 package qiang.tree;
 
 public class TreeNode {
-	public TreeNode left,right;
+	public TreeNode left,right,next;
 	public int  val;
 	
 	public TreeNode(){
