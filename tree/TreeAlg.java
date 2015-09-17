@@ -18,7 +18,7 @@ public class TreeAlg {
 		System.out.println();
 		TreeAlg.preOrder(root);
 		System.out.println();
-		TreeAlg.minOrder(root);
+		TreeAlg.inOrder(root);
 		System.out.println();
 		TreeAlg.levelOrder(TreeAlg.getCompleteTree());
 	}
@@ -70,11 +70,11 @@ public class TreeAlg {
 		preOrder(root.left);
 		preOrder(root.right);
 	}
-	public static void  minOrder(TreeNode root){
+	public static void  inOrder(TreeNode root){
 		if(root == null)  return ;
-		minOrder(root.left);
+		inOrder(root.left);
 		System.out.print(root.val+" ");
-		minOrder(root.right);
+		inOrder(root.right);
 	}
 	
 	public static void levelOrder(TreeNode root){
