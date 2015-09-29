@@ -1,11 +1,8 @@
-package qiang.leetcode;
+package qiang.tree;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-
-import qiang.tree.TreeAlg;
-import qiang.tree.TreeNode;
 
 public class BinaryTreePreorderTraversal144 extends TreeAlg{
 
