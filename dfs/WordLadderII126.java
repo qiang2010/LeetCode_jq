@@ -1,15 +1,20 @@
 package qiang.dfs;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
-public class WordLadder127 {
+import qiang.leetcode.util.PrintUtil;
 
+public class WordLadderII126 {
 
-	int min = Integer.MAX_VALUE;
-//	LinkedList<String> oneAns = new LinkedList<String>();
-	public int ladderLength(String beginWord, String endWord, Set<String> wordDict) {
+	List<List<String>> ans = new LinkedList<List<String>>();
+	LinkedList<String> oneAns = new LinkedList<>();
+	public List<List<String>> findLadders(String beginWord, String endWord, Set<String> wordDict) {
+
 		
+		//wordDict.add(endWord);
 		String [] words = new String[wordDict.size()];
 		boolean []visited = new boolean[wordDict.size()];
 		int i=0;
@@ -17,10 +22,12 @@ public class WordLadder127 {
 			visited[i] = false;
 			words[i++] = w;
 		}
-		
+		oneAns.add(beginWord);
 		dfsLadder(beginWord, endWord, beginWord, words, visited,0);
-		return min+2;
-	}	
+		return ans;
+	}
+ 
+ 
 	/**
 	 * 
 	 * @param beginWord
@@ -31,32 +38,26 @@ public class WordLadder127 {
 	 * @param deep
 	 * @return
 	 */
-	public boolean dfsLadder(String beginWord,String endWord,String lastword,String [] wordDict,boolean []visited,int deep){
+	public void dfsLadder(String beginWord,String endWord,String lastword,String [] wordDict,boolean []visited,int deep){
 		
 		if(isDistanceIsOne(endWord, lastword) || lastword.equals(endWord)) {
-			min = min < deep? min:deep;
-//			for(String a:oneAns){
-//				System.out.print(a+" ");
-//			}
-//			System.out.println();
-			return true;
+			LinkedList<String> tempAn = new LinkedList<>();
+			tempAn.addAll(oneAns);
+			tempAn.add(endWord);
+			ans.add(tempAn);
 		}
-		if(deep > wordDict.length)return false;
+		if(deep > wordDict.length)return;
 		for(int i =0; i < wordDict.length;i++){
 			if(visited[i])continue;
 			if(isDistanceIsOne(wordDict[i], lastword)){
 				visited[i]=true;
-				//oneAns.addLast(wordDict[i]);
-				if(dfsLadder(beginWord, endWord, wordDict[i], wordDict, visited, deep+1))
-					return true;
-				else{
-					// 回溯的时候需要复原
-					visited[i]=false;
-			//		oneAns.removeLast();
-				}
+				oneAns.addLast(wordDict[i]);
+				dfsLadder(beginWord, endWord, wordDict[i], wordDict, visited, deep+1);
+				// 回溯的时候需要复原
+				visited[i]=false;
+				oneAns.removeLast();
 			}
 		}
-		return false;
 	}
 	
 	
@@ -86,7 +87,8 @@ public class WordLadder127 {
 		wordDict.add("dog");
 		wordDict.add("lot");
 		wordDict.add("log");
-		System.out.println(new WordLadder127().ladderLength("hit", "cog", wordDict));
+		List<List<String>> ans = 	new WordLadderII126().findLadders("hit", "cog", wordDict);
+		PrintUtil.print2DList(ans);
 	}
 
 }

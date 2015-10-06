@@ -3,24 +3,43 @@ package qiang.dfs;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WordLadder127 {
+public class WordLadder127_2 {
 
 
 	int min = Integer.MAX_VALUE;
 //	LinkedList<String> oneAns = new LinkedList<String>();
 	public int ladderLength(String beginWord, String endWord, Set<String> wordDict) {
 		
-		String [] words = new String[wordDict.size()];
-		boolean []visited = new boolean[wordDict.size()];
+		if(wordDict == null) return 0;
+		int dictSize = wordDict.size();
+		String [] words = new String[dictSize+2];
+		words[dictSize] = beginWord;
+		words[dictSize+1] = endWord;
+		boolean []visited = new boolean[dictSize];
 		int i=0;
+		boolean [][]disFlag = new boolean[dictSize+2][dictSize+2];
 		for(String w:wordDict){
 			visited[i] = false;
+			disFlag[i][dictSize] = isDistanceIsOne(beginWord, w);
 			words[i++] = w;
 		}
 		
-		dfsLadder(beginWord, endWord, beginWord, words, visited,0);
+		for( i = 0 ; i <dictSize+2; i++ ){
+			for( int j  = i+1 ; j <dictSize+2; j++ ){
+				disFlag[i][j] = disFlag[j][i] = isDistanceIsOne(words[i], words[j]);  
+			}
+		}
+		
+		//dictSize 位置和dictSize+1 位置上分别是begin 和end
+		dfsLadder(disFlag, dictSize,words,dictSize, visited,0);
+		if(min == Integer.MAX_VALUE){
+			return 0;
+		}
 		return min+2;
 	}	
+	
+	
+	
 	/**
 	 * 
 	 * @param beginWord
@@ -31,9 +50,9 @@ public class WordLadder127 {
 	 * @param deep
 	 * @return
 	 */
-	public boolean dfsLadder(String beginWord,String endWord,String lastword,String [] wordDict,boolean []visited,int deep){
+	public boolean dfsLadder(boolean disFlag[][],int lastWord,String [] wordDict,int dictSize,boolean []visited,int deep){
 		
-		if(isDistanceIsOne(endWord, lastword) || lastword.equals(endWord)) {
+		if(disFlag[dictSize+1][lastWord]) {
 			min = min < deep? min:deep;
 //			for(String a:oneAns){
 //				System.out.print(a+" ");
@@ -41,13 +60,14 @@ public class WordLadder127 {
 //			System.out.println();
 			return true;
 		}
-		if(deep > wordDict.length)return false;
-		for(int i =0; i < wordDict.length;i++){
+		if(deep > min) return false;
+		if(deep > dictSize)return false;
+		for(int i =0; i < dictSize;i++){
 			if(visited[i])continue;
-			if(isDistanceIsOne(wordDict[i], lastword)){
+			if(disFlag[i][lastWord]){
 				visited[i]=true;
 				//oneAns.addLast(wordDict[i]);
-				if(dfsLadder(beginWord, endWord, wordDict[i], wordDict, visited, deep+1))
+				if(dfsLadder(disFlag, i, wordDict, dictSize, visited, deep+1))
 					return true;
 				else{
 					// 回溯的时候需要复原
@@ -82,11 +102,11 @@ public class WordLadder127 {
 		// TODO Auto-generated method stub
 		HashSet<String> wordDict = new HashSet<>();
 		wordDict.add("hot");
-		wordDict.add("dot");
+		//wordDict.add("dot");
 		wordDict.add("dog");
-		wordDict.add("lot");
-		wordDict.add("log");
-		System.out.println(new WordLadder127().ladderLength("hit", "cog", wordDict));
+	//	wordDict.add("lot");
+		//wordDict.add("log");
+		System.out.println(new WordLadder127_2().ladderLength("hot", "dog", wordDict));
 	}
 
 }
