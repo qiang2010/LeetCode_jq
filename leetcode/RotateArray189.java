@@ -3,6 +3,33 @@ package qiang.leetcode;
 public class RotateArray189 {
 
 	
+	
+	
+	public void rotate2(int[] nums, int k) {
+		
+		if(nums == null || nums.length < 2 || k ==0 )return;
+		int size = nums.length;
+		if(k > size ) k %=size;
+		
+		reverse(nums, 0, size-1);
+		
+		reverse(nums, 0, k-1);
+		reverse(nums, k, size-1);
+		
+	}
+	
+	public void reverse(int []nums,int begin,int end){
+		
+		if(end < begin ) return ;
+		int mid = (begin+end)/2;
+		int temp;
+		for(int i = begin,j = end; i<= mid; i++,j--){
+			temp = nums[i];
+			nums[i] = nums[j];
+			nums[j] = temp;
+		}
+	}
+	
     
 	public void rotate(int[] nums, int k) {
     
@@ -39,8 +66,8 @@ public class RotateArray189 {
 		
     }
 	public static void main(String[] args) {
-		int []nums = {1,2,3,4,5,6,7};
-		new RotateArray189().rotate(nums, 0);
+		int []nums = {1,2};
+		new RotateArray189().rotate2(nums,1);
 		for(int a:nums){
 			System.out.println(a);
 		}
