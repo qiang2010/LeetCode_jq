@@ -8,6 +8,10 @@ public class REXTest {
 	
 	public static void main(String[] args) {
 		
+		
+		System.out.println("000".equals("(0)+"));
+		
+		
 		String s = "leetcodecodecodecodecodeleeta";
 		
 		String pattern = "(leet|code)*";
