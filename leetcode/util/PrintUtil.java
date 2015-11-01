@@ -73,7 +73,13 @@ public class PrintUtil {
 			System.out.println();
 		}
 	}
-	
+	public static<T> void printList(List<T> list){
+		
+		for(T t:list){
+			System.out.print(t+" ");
+		}
+		System.out.println();
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
