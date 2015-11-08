@@ -8,7 +8,7 @@ public class BinaryTreePostorderTraversal145 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		BinaryTreePreorderTraversal144 ins = new BinaryTreePreorderTraversal144();
+		//BinaryTreePreorderTraversal144 ins = new BinaryTreePreorderTraversal144();
 		TreeNode root = TreeAlg.getTreeForSerialized("1#23#");
 		//System.out.println(ins.preorderTraversal(root).toString());
 		TreeAlg.postOrder(root);

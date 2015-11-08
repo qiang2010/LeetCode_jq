@@ -28,8 +28,7 @@ public class AddTwoNums2 {
     	if(l1 == null ) return l2;
     	if(l2 == null ) return l1;
     	ListNode head = new ListNode(-1);
-    	if(l1 == null && l2 == null ) return head; 
-    	 //1.  change listnode into int 
+    	//1.  change listnode into int 
     	long num1 =changeListNodeToNum(l1), num2=changeListNodeToNum(l2);
     	System.out.println(num1 + " " + num2);
     	long re = num1 + num2;
@@ -74,7 +73,7 @@ public class AddTwoNums2 {
     	if(l1 == null ) return l2;
     	if(l2 == null ) return l1;
     	ListNode head = new ListNode(-1);
-    	ListNode temp,next = head;
+    	ListNode next = head;
     	
     	
     	int cur =  l1.val + l2.val;

@@ -1,7 +1,5 @@
 package qiang.tree;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import qiang.list.ListNode;
 

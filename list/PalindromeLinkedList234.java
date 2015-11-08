@@ -1,6 +1,5 @@
 package qiang.list;
 
-import java.lang.annotation.Target;
 
 public class PalindromeLinkedList234 {
 

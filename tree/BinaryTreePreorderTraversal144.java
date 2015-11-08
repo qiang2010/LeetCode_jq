@@ -13,7 +13,7 @@ public class BinaryTreePreorderTraversal144 extends TreeAlg{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		BinaryTreePreorderTraversal144 ins = new BinaryTreePreorderTraversal144();
-		TreeNode root = ins.getTreeExample();
+		TreeNode root = TreeAlg.getTreeExample();
 		System.out.println(ins.preorderTraversal(root).toString());
 		System.out.println(ins.inorderTraversal(root).toString());
 	}
