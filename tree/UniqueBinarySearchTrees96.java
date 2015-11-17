@@ -51,8 +51,8 @@ public class UniqueBinarySearchTrees96 {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(new UniqueBinarySearchTrees96().numTrees(14));
-		System.out.println(new UniqueBinarySearchTrees96().numTrees2(14));
+		System.out.println(new UniqueBinarySearchTrees96().numTrees(5));
+		System.out.println(new UniqueBinarySearchTrees96().numTrees2(5));
 	}
 
 }
