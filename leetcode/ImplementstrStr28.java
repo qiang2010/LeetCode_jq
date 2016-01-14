@@ -31,11 +31,67 @@ public class ImplementstrStr28 {
     
     }	
 	
+    
+    /**
+     * KMP 算法，实现判断一个串是否是另一个的子串
+     * @param haystack
+     * @param needle
+     * @return
+     */
+    public static int strStrKMP(String haystack, String needle) {
+    	
+    	if(needle == null || haystack == null){
+    		return -1;
+    	}
+    	int ns = needle.length();
+    	int hs = haystack.length();
+    	if(ns > hs){
+    		return -1;
+    	}
+    	if(ns ==0){
+    		return 0;
+    	}
+    	if(hs == 0){
+    		return -1;
+    	}
+    	// 构建next数组
+    	// next[i] 记录的是以needle[i] 字符结尾的最长前缀
+    	int next[] = new int[ns];
+    	next[0] = 0;
+    	
+    	for(int i = 1;i<ns;i++){
+    		next[i] = 0;
+    		char c = needle.charAt(i);
+    		int k;
+    		for(k = next[i-1];k > 0 && needle.charAt(k)!=c;k = next[k-1]);
+    		if(needle.charAt(k) == c){
+    			next[i] = k+1;
+    		}
+    	}
+//    	for(int a:next){
+//    		System.out.println(a);
+//    	}
+    	int i =0,j=0;
+    	while(i<hs && j<ns){
+    		if(needle.charAt(j)==haystack.charAt(i)){
+    			i++;j++;
+    		}else if(j ==0){// 第一个就不相等
+    			i++;
+    		}else{
+    			j = next[j-1];
+    		}
+    	}
+    	if(j == ns){
+    		return i-j;
+    	}
+    	return -1;
+    }
+    
 	
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(strStr("mississippi", "issip"));
+		System.out.println(strStrKMP("a", "a"));
 	}
 
 }

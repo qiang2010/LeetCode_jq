@@ -10,7 +10,6 @@ public class BinaryTreeLevelOrderTraversal102 {
 
 	
 	
-	
     public static List<List<Integer>> levelOrder(TreeNode root) {
         
         List<List<Integer>> ans = new LinkedList<List<Integer>>();

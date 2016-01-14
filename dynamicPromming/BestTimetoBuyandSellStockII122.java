@@ -1,4 +1,4 @@
-package qiang.leetcode;
+package qiang.dynamicPromming;
 
 public class BestTimetoBuyandSellStockII122 {
 

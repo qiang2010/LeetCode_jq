@@ -40,10 +40,11 @@ public class PowX_N {
 		if(n ==1) return x;
 		if(n ==0 ) return 1.0;
 		if(n==2) return x*x;
+		double left = myPowNgreaterThan0(x, n/2);
 		if(n%2==0)
-			return myPowNgreaterThan0(x, n/2)*myPowNgreaterThan0(x, n/2);
+			return left*left;
 		else
-			return myPowNgreaterThan0(x, n/2)*myPowNgreaterThan0(x, n/2)*x;
+			return left*left*x;
 	}
 	/**
 	 *  上面的分治法也超时，这里使用移位操作
