@@ -34,7 +34,6 @@ public class ShortestPalindromeKMP214 {
  			if(c == newS.charAt(k)){
  				next[i] = k+1;
  			}
- 			
  		}
  		return sbR.substring(0,sbR.length()-next[next.length-1])+s;
  	}
