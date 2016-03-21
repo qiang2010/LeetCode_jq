@@ -2,10 +2,7 @@ package qiang.dfs;
 
 import java.util.HashSet;
 import java.util.Set;
-
 public class WordBreak139_2 {
-
- 
 	 
 //	boolean flag= false;
 	int max = -1;

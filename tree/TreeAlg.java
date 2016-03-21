@@ -15,10 +15,17 @@ public class TreeAlg {
 		//TreeAlg  treeAlg = new TreeAlg();
 		TreeNode root = TreeAlg.buildTree(first, 0, first.length()-1, mid, 0, mid.length()-1);
 		TreeAlg.postOrder(root);
-		System.out.println();
+
+		System.out.println("pp");
+		postOrderNoIn(root);
+		System.out.println("pp");
 		TreeAlg.preOrder(root);
+		System.out.println("pp");
+		TreeAlg.preOrderNoIt(root);
 		System.out.println();
 		TreeAlg.inOrder(root);
+		System.out.println();
+		inOrderNoIn(root);
 		System.out.println();
 		TreeAlg.levelOrder(TreeAlg.getCompleteTree());
 	}
@@ -64,17 +71,92 @@ public class TreeAlg {
 		postOrder(root.right);
 		System.out.print(root.val+" ");
 	} 
+	
+	public static void postOrderNoIn(TreeNode root){
+		
+		if(root ==null) return ;
+		LinkedList<TreeNode> stack = new LinkedList<>();
+		LinkedList<Boolean> flag = new LinkedList<>();
+
+		boolean curFlag;
+		while(!stack.isEmpty() || root!=null){
+			while(root !=null){
+				stack.addLast(root);
+				flag.addLast(true);
+				root = root.left;
+			}
+			root = stack.getLast();
+			curFlag = flag.getLast();
+			flag.removeLast();
+			if(curFlag){// 
+				flag.addLast(false);
+				root = root.right;
+			}else{
+				stack.removeLast();
+				System.out.print(root.val+" ");
+				root = null; // 第一次的时候缺少这一句，陷入死循环。
+			}
+		}
+	}
+	
+	
 	public static void preOrder(TreeNode root){
 		if(root == null) return;
 		System.out.print(root.val+" ");
 		preOrder(root.left);
 		preOrder(root.right);
 	}
+	
+	/**
+	 * 非递归先根遍历
+	 * @param root
+	 */
+	public static void preOrderNoIt(TreeNode root){
+		
+		if(root == null) return ;
+		LinkedList<TreeNode> stack = new LinkedList<>(); // 使用栈
+		
+		while(!stack.isEmpty() || root !=null){
+			
+			while(root != null){
+				stack.addLast(root);
+				System.out.print(root.val+"\t");
+				root = root.left;
+			}
+			root = stack.getLast().right;
+			stack.removeLast();
+		}
+	}
+	
+	
 	public static void  inOrder(TreeNode root){
 		if(root == null)  return ;
 		inOrder(root.left);
 		System.out.print(root.val+" ");
 		inOrder(root.right);
+	}
+	/**
+	 * 中根遍历的非递归
+	 * @param root
+	 */
+	public static void inOrderNoIn(TreeNode root){
+		
+		if(root == null)return;
+		LinkedList<TreeNode> stack = new LinkedList<>();
+		while(!stack.isEmpty() || root != null){
+			
+			while(root!=null){
+				stack.addLast(root);
+				root = root.left;
+			}
+			root = stack.getLast();
+			stack.removeLast();
+			System.out.print(root.val+" ");
+			root = root.right;
+			
+		}
+		
+		
 	}
 	
 	public static void levelOrder(TreeNode root){

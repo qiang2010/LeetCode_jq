@@ -11,7 +11,7 @@ public class CloneGraph133 {
     
 	public static void main(String[] args) {
 		
-		UndirectedGraphNode node = GraphAlg.getGraphFromSerializedString("-1,1#1");
+		UndirectedGraphNode node = GraphAlg.getGraphFromSerializedString("0,0,0");
 		GraphAlg.bfsGraph(node);
 		System.out.println();
 		UndirectedGraphNode newNode =cloneGraph(node); 

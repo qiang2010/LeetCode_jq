@@ -1,4 +1,4 @@
-package qiang.leetcode;
+package qiang.leetcode2;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public class TheSkylineProblem218 {
+public class TheSkylineProblem218_2 {
 
 	class Edge{
 		int x;
@@ -18,10 +18,6 @@ public class TheSkylineProblem218 {
 			this.isStart = isStart;
 		}
 	}
-	
-	
-	
-	
     public List<int[]> getSkyline(int[][] buildings) {
     
     	List<int[]> ans = new ArrayList<>();

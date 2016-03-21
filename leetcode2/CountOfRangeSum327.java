@@ -7,31 +7,29 @@ public class CountOfRangeSum327 {
 
 	public static void main(String[] args) {
 		
-		int []nums = {-2,5,-1};
-		System.out.println(countRangeSum(nums, -2, 2));
+		int []nums = {2147483647,-2147483648,-1,0};
+		System.out.println(countRangeSum(nums, -1,0));
 		
 	}
 	   
-	public static  int countRangeSum(int[] nums, int lower, int upper) {
-	
-		int ans = 0;
-		if(nums == null || nums.length ==0)return ans;
-		TreeSet<Integer> sumSort = new TreeSet<>();
-		sumSort.add(nums[0]);
-		int sum = nums[0];
-		int up,low;
-		SortedSet<Integer> temp;
-		//if(sum<=upper && sum>=lower )ans++;
-		for (int i =1; i < nums.length;i++){
-			sum +=nums[i];
-			up = sum - lower;
-			low = sum  - upper;
-			temp = sumSort.subSet(low, up);
-			System.out.println(temp.toString()+":"+sumSort.toString());
-			ans +=temp.size();
-			sumSort.add(sum);
-		}
+	public static  int countRangeSum(int[] nums, int lower, int upper) { 
 		
+		if(nums == null || nums.length==0)return 0;
+		BST327 bst = new BST327();
+		long pSum =0;
+		int ans =0;
+		bst.insertOneNum(pSum);
+		for(int n:nums){
+			pSum +=n;
+			long ff = pSum-(long)lower;
+			long ss = pSum-(long)upper;
+			int f1 = bst.findLessThanEqal(ff);
+			int f2 = bst.findLessThanEqal(ss-1);
+			ans +=f1-f2;
+			bst.insertOneNum(pSum);
+			bst.print();System.out.println();
+		}
+//		ans +=(bst.findLessThanEqal(pSum-lower)-bst.findLessThan(pSum-upper));
 		return ans;
 	}
 	
