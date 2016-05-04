@@ -7,8 +7,6 @@ public class RecoverBinarySearchTree99 {
 	
 	
 	/**
-	 * 
-	 * 
 	 * 下面的空间使用是O(N)
 	 * 
 	 */
@@ -58,6 +56,31 @@ public class RecoverBinarySearchTree99 {
 		inOrder(root.right);
 	}
 	
+	/**
+	 * 这里我们一边中序遍历，一边记录要求解的节点
+	 * @param root
+	 */
+	TreeNode pre = null,first = null,second = null;
+	public void recoverTree2(TreeNode root) {
+		if(root == null) return;
+		inOrder2(root);
+		if(first!=null && second !=null){
+			
+			int temp = first.val;
+			first.val = second.val;
+			second.val = temp;
+		}
+	}
+	void inOrder2(TreeNode root){
+		if(root == null) return;
+		inOrder2(root.left);
+		if(pre != null && pre.val > root.val){
+			if(first == null) first = pre;
+			if(first != null) second = root;
+		}
+		pre = root; // 每次都更新pre
+		inOrder2(root.right);
+	}
 	
 	
 	

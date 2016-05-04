@@ -34,7 +34,6 @@ public class TheSkylineProblem218_2 {
     	
     	for(Edge e:edges){
     		if(e.isStart){
-    			
     			if(heightHeap.isEmpty() || e.h > heightHeap.peek()){
     				ans.add(new int[]{e.x,e.h});
     			}

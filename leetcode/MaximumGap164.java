@@ -18,27 +18,7 @@ public class MaximumGap164 {
 		int maxNum = max(nums,0,nums.length-1);
 		int minNum = min(nums,0,nums.length-1);
 		int ans = 0;
-//		if(maxNum - minNum == nums.length -1){
-//			bucketSize = 1;
-//			bucketNum = nums.length;
-//			int []buckets = new int[bucketNum];
-//			for(int i =0 ;i < bucketNum; i ++){
-//				buckets[nums[i] - minNum] = nums[i];
-//			}
-//			for(int i =0 ;i < bucketNum; i ++){
-//				buckets[nums[i] - minNum] = nums[i];
-//			}
-//			int lastNotZero = 0;
-//			for(int i =1;i  < bucketNum;){
-//				
-//				while(buckets[i++] == 0);
-//				
-//			}
-//			
-//			
-//		}
-		
-		bucketSize = (int)Math.ceil((maxNum - minNum)*1.0/(nums.length-1));
+		bucketSize = (int)Math.ceil((maxNum - minNum)*1.0/(nums.length));
 		if(bucketSize == 0)return 0;
 		bucketNum = (maxNum - minNum)/bucketSize+1;
 		
@@ -93,10 +73,56 @@ public class MaximumGap164 {
 		return ans;
 	}
 	
+	public int maximumGap2(int[] nums){
+		
+		if(nums == null || nums.length <2) return 0;
+		
+		if(nums.length ==2) return Math.abs(nums[0]-nums[1]);
+		int bucketSize ;
+		int bucketNum;
+		int maxNum = max(nums,0,nums.length-1);
+		int minNum = min(nums,0,nums.length-1);
+		int ans = 0;
+		bucketSize = (int)Math.ceil((maxNum - minNum)*1.0/(nums.length));
+		if(bucketSize == 0)return 0;
+		bucketNum = (maxNum - minNum)/bucketSize+1;
+		
+		int maxB[] = new int[bucketNum];
+		int minB[] = new int[bucketNum];
+		for(int i = 0 ; i < bucketNum; i++){
+			 maxB[i] = Integer.MIN_VALUE;
+			 minB[i] = Integer.MAX_VALUE;
+		}
+		
+		for(int i = 0 ; i < nums.length; i++){
+			int buck = (nums[i]- minNum)/bucketSize;
+			maxB[buck] = nums[i] > maxB[buck]  ? nums[i]:maxB[buck] ;
+			minB[buck] = nums[i] > minB[buck]? minB[buck]: nums[i];
+		}
+		int lastMax = maxB[0];
+//		int lastMin = minB[0];
+		int curMax,curMin;
+		for(int i = 1; i <bucketNum;i++){
+			curMax = maxB[i];
+			curMin = minB[i];
+			while(curMax == Integer.MIN_VALUE && ++i < bucketNum){
+				curMax = maxB[i];
+				curMin = minB[i];
+			}
+			if(i > bucketNum-1) break;
+ 
+			if(curMin - lastMax > ans){
+				ans = curMin - lastMax;
+			}
+			lastMax = curMax;
+		}
+		return ans;
+	}
+	
 	public static void main(String[] args) {
 		
 		int []nums={1,1,1,1};
-		System.out.println(new MaximumGap164().maximumGap(nums));
+		System.out.println(new MaximumGap164().maximumGap2(nums));
 		
 	}
 }

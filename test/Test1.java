@@ -7,10 +7,11 @@ public class Test1 {
 	
 	public static void main(String[] args) {
 		
+		System.out.println("abc".substring(2)); // 为空
+		
 		int k = Integer.MIN_VALUE;
 		System.out.println( k &1);
 		System.out.println((1<<31)&1);
-		
 		
 		String a = "hello2";
 		String b = "hello";

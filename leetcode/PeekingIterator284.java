@@ -17,57 +17,55 @@ public class PeekingIterator284 implements Iterator<Integer> {
 
 		System.out.println(pi.hasNext());
 	
-		System.out.println(pi.peek());
-		System.out.println(pi.peek());
+		System.out.println(pi.peek());//1
+		System.out.println(pi.peek());//1
 		
 		System.out.println(pi.next());//1
 		System.out.println(pi.next());//2
 		
-		System.out.println(pi.peek());
-		System.out.println(pi.peek());
+		System.out.println(pi.peek());//3
+		System.out.println(pi.peek());//3
 		
-		System.out.println(pi.next());
-	
+		System.out.println(pi.next());//3
+		System.out.println(pi.peek());//4
+		System.out.println(pi.hasNext());//4
+		System.out.println(pi.next());//4
+		System.out.println(pi.hasNext());//4
 	}
 	
 	Iterator<Integer> it;
-	int cur;
+	int top;
 	boolean first = true;
-	boolean nextNeed = true;
+	boolean second = true;
 	public PeekingIterator284(Iterator<Integer> iterator) {
-
 		this.it = iterator;
+		if(it.hasNext()){
+			top = it.next();
+		}
 	}
-
     // Returns the next element in the iteration without advancing the iterator.
 	public Integer peek() {
-        if(first){
-        	cur = it.next();
-        	first = false;
-        	nextNeed = true;
-        	return cur;
-        }
-        return cur;
+        return top;
 	}
 
 	// hasNext() and next() should behave the same as in the Iterator interface.
 	// Override them if needed.
 	@Override
 	public Integer next() {
-		if(!first && nextNeed){
-			nextNeed = false;
-			return cur;
-		}else{
+		int cur = top;
+		if(it.hasNext())
+			top = it.next();
+		else {
 			first = false;
-			nextNeed = false;
 		}
-		
-		cur = it.next();
+	
 		return cur;
+ 
 	}
 
 	@Override
 	public boolean hasNext() {
-	    return it.hasNext();
+		return  first;
 	}
 }
+

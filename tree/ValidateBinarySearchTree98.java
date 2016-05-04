@@ -72,6 +72,28 @@ public class ValidateBinarySearchTree98 {
 			return root.left.val < root.val && left &&right;
 		return true;
 	}
+	/**
+	 * 这里使用BST节点的范围判断
+	 * @param root
+	 * @return
+	 */
+	public   boolean isValidBST4(TreeNode root) {
+		return isBST(root,Long.MIN_VALUE,Long.MAX_VALUE);
+	}
+	boolean isBST(TreeNode root ,long low,long upper){
+		
+		if(root == null) return true;
+		if(root.val > low && root.val < upper){
+			boolean left = isBST(root.left,low,root.val);
+			if(!left)return false;
+			boolean right = isBST(root.right,root.val,upper);
+			if(right) return true;
+		}
+		return false;
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TreeNode root = TreeAlg.getTreeForSerialized("1#32");
