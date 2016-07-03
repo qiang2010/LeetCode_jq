@@ -1,6 +1,9 @@
 package qiang.dynamicPromming;
 
-public class InterLeavingString97 {
+public class InterLeavingString97_2 {
+   
+	
+	
 	
 	public static  boolean isInterleave(String s1, String s2, String s3) {
     
@@ -22,20 +25,18 @@ public class InterLeavingString97 {
 		if(size1 + size2 != size3)return false; // 长度不同肯定为false
 		boolean dp[][]  = new boolean[size1+1][size2+1];
 		// 初始化
-		dp[0][0] = true;
-		for(int i =1; i < 1 + size1 ;i ++){
-			dp[i][0] = s1.charAt(i-1) == s3.charAt(i-1)? dp[i-1][0]:false;
+		dp[0][0] =true;
+		for(int i =1;i<size1+1;i++){
+			dp[i][0] = dp[i-1][0] && (s1.charAt(i-1) == s3.charAt(i-1));
 		}
-		
-		for(int j =1; j < size2 + 1; j++){
-			dp[0][j] = s2.charAt(j-1) == s3.charAt(j-1)? dp[0][j-1]:false;
+		for(int i =1; i< size2+1;i++){
+			dp[0][i] = dp[0][i-1] && (s2.charAt(i-1) == s3.charAt(i-1));
 		}
-		for(int i =1; i < size1+1 ; i++){
-			for(int j =1; j < size2+1; j++){
-					dp[i][j] = (s2.charAt(j-1) == s3.charAt(i+j-1)? dp[i][j-1]:false) ||
-							(s1.charAt(i-1) == s3.charAt(i+j-1)? dp[i-1][j]:false);
+		for(int i =1;i<size1+1;i++)
+			for(int j =1;j < size2+1;j++){
+				dp[i][j] = (dp[i-1][j] && s1.charAt(i-1)==s3.charAt(i+j-1)) ||
+						(dp[i][j-1] && s2.charAt(j-1) == s3.charAt(i+j-1));
 			}
-		}
 		return dp[size1][size2];
     }
 	

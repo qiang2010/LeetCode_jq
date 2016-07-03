@@ -3,8 +3,6 @@ package qiang.leetcode4;
 public class PoweroFour342 {
 
 	public static void main(String[] args) {
-
-		
 	}
 	  
 	public boolean isPowerOfFour(int num) {

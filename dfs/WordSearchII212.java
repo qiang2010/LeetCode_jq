@@ -22,8 +22,6 @@ public class WordSearchII212 {
 			System.out.println(s);
 		}
 	}
-	
-	
 	/**
 	 * 这里使用Trie数来解决。
 	 * @param board
