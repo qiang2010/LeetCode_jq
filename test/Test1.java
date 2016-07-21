@@ -17,6 +17,8 @@ public class Test1 {
        System. out.println( "x1:" + x1 + ", x2:" + x2);
        System. out.println( "x3:" + x3 + ", x4:" + x4);
        System. out.println( "x3:" + x3 + ", x5:" + x5);
+       StringBuilder sb = new StringBuilder();
+       sb.reverse();
 	}
 	
 }

@@ -17,8 +17,6 @@ public class LongestIncreasingSubsequence300_2 {
 	 * @return
 	 */
 	public int lengthOfLIS(int[] nums) {
-		  
-	       
 		if(nums == null || nums.length == 0) return 0;
 		int s = nums.length;
 	    int dp[]    = new int[s];
@@ -32,8 +30,8 @@ public class LongestIncreasingSubsequence300_2 {
 	    	if(index == ansLen){
 	    		ansLen++;
 	    	}
-	    	
 	    }
+	    return ansLen;
 	}
 	
 }

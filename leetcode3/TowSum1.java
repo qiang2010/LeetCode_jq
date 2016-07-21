@@ -27,7 +27,17 @@ public class TowSum1 {
     	
     	return res;
     }
-	
+	boolean isValid(String s){
+		if(s == null || s.length()==0) return true;
+		int count =0;
+		for(int i =0;i< s.length();i++){
+			char c = s.charAt(i);
+			if(c == '(') count++;
+			else if(c ==')')count--;
+			if(count < 0) return false;
+		}
+		return count == 0;
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int [] nums = {2, 7, 11, 15};

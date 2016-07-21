@@ -4,9 +4,11 @@ public class FindTheDuplicatNumber287 {
    
 	public static void main(String[] args) {
 		
-		int []nums = {2,5,9,6,9,3,8,9,7,1};
-		System.out.println(new FindTheDuplicatNumber287().findDuplicate(nums));
-		System.out.println(new FindTheDuplicatNumber287().findDuplicate2(nums));
+//		int []nums = {2,5,9,6,9,3,8,9,7,1};
+		int []nums = {1,3,4,2,2};
+//		System.out.println(new FindTheDuplicatNumber287().findDuplicate(nums));
+//		System.out.println(new FindTheDuplicatNumber287().findDuplicate2(nums));
+		System.out.println(new FindTheDuplicatNumber287().findDup(nums));
 	}
 	
 	
@@ -47,4 +49,30 @@ public class FindTheDuplicatNumber287 {
 		}
 		return ans;
 	}
+	
+	/**
+	 * 这里使用鸽巢原理来做。
+	 * @param nums
+	 * @return
+	 */
+	public int findDup(int []nums){
+		int left = 1;
+		int right = nums.length-1;
+		int mid=0;
+		while(left < right){
+			mid = (left + ((right-left)>>1));
+			int c = 0;
+			for(int n:nums){
+				if(n <= mid) c++;
+			}
+			if(c <= mid){
+				left = mid+1;
+			}else{
+				right = mid;
+			}
+		}
+		System.out.println(mid+"\t"+left+"\t"+right);
+		return left;
+	}
+	
 }

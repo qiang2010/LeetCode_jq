@@ -1,5 +1,6 @@
 package qiang.tree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -40,11 +41,22 @@ public class BinaryTreeRightSideView199 {
         
     
 	}
+    public List<Integer> rightSideView2(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        preOrder(root, ans,0);
+        return ans;
+    }
+    void preOrder(TreeNode root, List<Integer> ans,int level){
+        if(root ==  null ) return;
+        if(level == ans.size()){
+            ans.add(root.val);
+        }
+        preOrder(root.right,ans,level+1);
+        preOrder(root.left, ans, level+1);
+        
+    }
 	public static void main(String[] args) {
-		
 		TreeNode root = TreeAlg.getTreeForSerialized("1");
 		System.out.println(new BinaryTreeRightSideView199().rightSideView(root));
-		
-		
 	}
 }

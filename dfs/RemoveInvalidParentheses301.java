@@ -37,6 +37,7 @@ public class RemoveInvalidParentheses301 {
     			if(curS.charAt(d) == par[1] && ( d==j || curS.charAt(d-1)!=par[1] )){
     				String can = curS.substring(0,d)+curS.substring(d+1);
     				dfs(can,k,d,ans,par);
+//    				break; // 临时增加， 错误使用
     			}
     		}
     		return ;

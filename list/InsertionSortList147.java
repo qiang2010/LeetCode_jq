@@ -38,14 +38,47 @@ public class InsertionSortList147 {
 	}	
 	
 	
+	/**
+	 * 充分利用这个是链表的例子
+	 * @param head
+	 * @return
+	 */
+	public ListNode insertionSortList2(ListNode head) {
+		
+		if(head == null || head.next ==null ) return head;
+		ListNode sortedHead = head;
+		ListNode sortedTail = head;
+		head = head.next;
+		sortedTail.next = null;
+		while(head != null){
+			ListNode cur  = head;
+			head  = head.next ;
+			cur.next = null;
+			if(cur.val <= sortedHead.val){
+				cur.next = sortedHead;
+				sortedHead = cur;
+			}else{
+				if(cur.val >= sortedTail.val){
+					sortedTail.next = cur;
+					sortedTail = cur;
+				}else{
+					ListNode th = sortedHead;
+					while(th.next !=null && th.next.val < cur.val)th = th.next;
+					cur.next = th.next;
+					th.next = cur;
+				}
+			}
+		}
+		return sortedHead;
+		
+		
+	}
+	
 	public static void main(String[] args) {
 
 		int []nums = {5,5};
 		ListNode head = ListNode.getListByNums(nums);
-		ListNode.printList(new InsertionSortList147().insertionSortList(head));
-		
-		
-		
+		ListNode.printList(new InsertionSortList147().insertionSortList2(head));
 	}
 
 }

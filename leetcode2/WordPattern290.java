@@ -30,7 +30,6 @@ public class WordPattern290 {
 				map.put(splits[i], pattern.charAt(i));
 				chars.add(pattern.charAt(i));
 			}
-			
 		}
 		return true;
 	}

@@ -1,5 +1,6 @@
 package qiang.test;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class T2 {
         Integer a1 = 12;
         Integer a2 = 12;
         System.out.println(a1==a2);
+        BigInteger big = new BigInteger("123");
         
         
 	}
